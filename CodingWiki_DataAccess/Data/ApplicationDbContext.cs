@@ -11,7 +11,7 @@ namespace CodingWiki_DataAccess.Data
     public class ApplicationDbContext : DbContext
     {
         public DbSet<Book> Books { get; set; }
-        public DbSet<Genre> Genres { get; set; }
+        // public DbSet<Genre> Genres { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
@@ -60,6 +60,26 @@ namespace CodingWiki_DataAccess.Data
  * >> Remove-Migration
  * >> add-migration changePriceColumnToDecimalInBooksTable
  * >> update-database
+ * 
+ * 21. When to Add Migration?
+ * 
+ * - Add a new class / table in the database.
+ * - Add a new property / column to table.
+ * - Modify existing property / column in a table.
+ * - Delete existing property/ column in a table.
+ * - Delete a class / table in the database.
+ * Advice: One advice that I will give you when you are working with entity framework core is always 
+ * make small changes and keep your migrations as small as possible.
+ * Because if a migration is small, you can validate all the changes that are going through in the 
+ * migration to make sure that it looks as it is expected to be, and that should always be checked 
+ * before you update.
+ * You might be tempted to alter some things in the old migration or even remove any old migration.
+ * Never ever do that. Never try to delete a migration from the migrations folder unless you know what 
+ * exactly you are doing or unless you are super experienced with entity framework core.
+ * Because removing a migration will break multiple things in your application and it will haunt you down
+ * the road. You should always make the changes in the models or the application DB context where we 
+ * have the on model creating helper method.
+ * 
  * 
  */
 
