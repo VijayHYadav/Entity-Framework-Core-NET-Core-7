@@ -80,6 +80,10 @@ namespace CodingWiki_DataAccess.Data
  * the road. You should always make the changes in the models or the application DB context where we 
  * have the on model creating helper method.
  * 
+ * 22. Rolling back to Old Migrations
+ * 
+ * >> update-database AddBookToDb
+ * >> update-database
  * 
  */
 
