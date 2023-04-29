@@ -14,7 +14,7 @@ namespace CodingWiki_DataAccess.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            options.UseSqlServer("Server=VIJAYY\\SQLEXPRESS;Database=CodingWiki;TrustServerCertificate=True;Trusted_Connection=True;");
+            options.UseSqlServer("Data source=(localdb)\\MSSQLLocalDB; Initial Catalog=CodingWiki");
         }
     }
 }
@@ -28,5 +28,17 @@ namespace CodingWiki_DataAccess.Data
  * DB set: DB set will basically be responsible or rather be the classes of the tables that we want in our application.
  * whatever name we give to our DB set will be the name of the table that gets added in database.
  * 
+ * 13. Apply Migration
  * 
+ * right now we have created the table for our book model in our database, and we applied the migration
+ * 
+ */
+
+/**
+ * Connection String of SqlServer and localdb
+ * 
+ * localdb: Data source=(localdb)\\MSSQLLocalDB; Initial Catalog=FootballLeage_EfCore
+ * 
+ * SqlServer: options.UseSqlServer("Server=VIJAYY\\SQLEXPRESS;Database=CodingWiki;TrustServerCertificate=True;
+ * Trusted_Connection=True;");
  */
