@@ -16,6 +16,11 @@ namespace CodingWiki_DataAccess.Data
         {
             options.UseSqlServer("Data source=(localdb)\\MSSQLLocalDB; Initial Catalog=CodingWiki");
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Book>().Property(u => u.Price).HasPrecision(10, 5);
+        }
     }
 }
 
@@ -47,7 +52,14 @@ namespace CodingWiki_DataAccess.Data
  * on the snapshot. And then it will add that in the new migration. That is how EF core will track all the
  * changes that are there between the current code and the database.
  * When we practice this, we add more migration, we update more database, everything will make much sensce
-
+ * 
+ * 15. Remove Migration and Update Existing Table
+ * 
+ * >> add-migration changePriceColumnToDecimalInBooksTable
+ * >> Remove-Migration
+ * >> add-migration changePriceColumnToDecimalInBooksTable
+ * >> update-database
+ * 
  */
 
 /**
