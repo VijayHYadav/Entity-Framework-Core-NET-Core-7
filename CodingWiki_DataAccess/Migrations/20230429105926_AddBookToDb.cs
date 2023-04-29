@@ -34,3 +34,10 @@ namespace CodingWiki_DataAccess.Migrations
         }
     }
 }
+
+/*
+ * 12. Understanding Migration
+ * Up: Up basically has what it needs to do.
+ * Down: down basically will have everything to revert back the changes.
+ * 
+ */
