@@ -85,6 +85,13 @@ namespace CodingWiki_DataAccess.Data
  * >> update-database AddBookToDb
  * >> update-database
  * 
+ * 24. More Commands
+ * 
+ * >> get-migration
+ * >> drop-database
+ * >> update-database
+ * 
+ * 
  */
 
 /**
