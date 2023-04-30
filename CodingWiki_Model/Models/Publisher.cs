@@ -14,5 +14,11 @@ namespace CodingWiki_Model.Models
         [Required]
         public string Name { get; set; }
         public string Location { get; set; }
+        public List<Book> Books { get; set; }
     }
 }
+
+/**
+ * what if we want to retrieve all the details of books that a publisher has published?
+ * we have added a navigation property here to retrieve all of the books that a publisher has published.
+ */

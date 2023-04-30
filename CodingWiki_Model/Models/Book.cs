@@ -21,6 +21,10 @@ namespace CodingWiki_Model.Models
         public string PriceRange { get; set; }
         
         public BookDetail BookDetail { get; set; }
+
+        [ForeignKey("Publisher")]
+        public int Publisher_Id { get; set; }
+        public Publisher Publisher { get; set; }
     }
 }
 
@@ -63,4 +67,14 @@ namespace CodingWiki_Model.Models
  * public double DiscountPrice { get; set; }
  * not mapped basically means that there is some property which is doing some computation, but that
  * property should not be added as a new column.
+ * 
+ * 36. Demo - "One to Many" and Apply Migrations
+ * 
+ * 1. Cascade: That basically means that if the parent record, which is the book, if book will be deleted,
+ * then the book detail will also be deleted.
+ * 2. No action: basically means that if the book is deleted, we do not want to perform any action on the book detail.
+ * 3. Set null: which will set that as null else we can set it to some default values.
+ * 4. Restrict : basically means that if there are any book details there, do not perform the operation, restrict that and 
+ * do not proceed further.
+ * 
  */

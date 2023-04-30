@@ -4,6 +4,7 @@ using CodingWiki_DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodingWiki_DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230430160927_addOneToManyRelation_Book_Publisher")]
+    partial class addOneToManyRelation_Book_Publisher
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,7 +50,7 @@ namespace CodingWiki_DataAccess.Migrations
 
                     b.HasKey("Author_Id");
 
-                    b.ToTable("Authors", (string)null);
+                    b.ToTable("Authors");
                 });
 
             modelBuilder.Entity("CodingWiki_Model.Models.Book", b =>
@@ -77,7 +80,7 @@ namespace CodingWiki_DataAccess.Migrations
 
                     b.HasIndex("Publisher_Id");
 
-                    b.ToTable("Books", (string)null);
+                    b.ToTable("Books");
 
                     b.HasData(
                         new
@@ -147,7 +150,7 @@ namespace CodingWiki_DataAccess.Migrations
                     b.HasIndex("Book_Id")
                         .IsUnique();
 
-                    b.ToTable("BookDetails", (string)null);
+                    b.ToTable("BookDetails");
                 });
 
             modelBuilder.Entity("CodingWiki_Model.Models.Category", b =>
@@ -165,7 +168,7 @@ namespace CodingWiki_DataAccess.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("CodingWiki_Model.Models.Publisher", b =>
@@ -185,7 +188,7 @@ namespace CodingWiki_DataAccess.Migrations
 
                     b.HasKey("Publisher_Id");
 
-                    b.ToTable("Publishers", (string)null);
+                    b.ToTable("Publishers");
 
                     b.HasData(
                         new
@@ -223,7 +226,7 @@ namespace CodingWiki_DataAccess.Migrations
 
                     b.HasKey("SubCategory_Id");
 
-                    b.ToTable("SubCategorys", (string)null);
+                    b.ToTable("SubCategorys");
                 });
 
             modelBuilder.Entity("CodingWiki_Model.Models.Book", b =>
