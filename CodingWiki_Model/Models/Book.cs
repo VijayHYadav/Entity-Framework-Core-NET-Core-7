@@ -38,4 +38,13 @@ namespace CodingWiki_Model.Models
  * 
  * [Column("BookISBN")]
  * public string ISBN { get; set; }
+ * 
+ * 27. Key and Required Data Annotations
+ * 
+ * [Required]
+ * public string Title { get; set; }
+ * 
+ * [Key]
+ * public int Category_Id { get; set; }
+ * 
  */
