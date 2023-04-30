@@ -29,4 +29,13 @@ namespace CodingWiki_Model.Models
  * primary key else if you have any other name.
  * But if it ends with an ID here and if key is not defined on any other property, then this column will also be assumed as
  * the primary key of the table.
+ * 
+ * 
+ * 26. Update Table and Column Name
+ * 
+ * [Table("tb_Category")]
+ * public class Category
+ * 
+ * [Column("BookISBN")]
+ * public string ISBN { get; set; }
  */
