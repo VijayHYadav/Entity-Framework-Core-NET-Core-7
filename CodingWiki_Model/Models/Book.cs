@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,8 +13,12 @@ namespace CodingWiki_Model.Models
         // [Key]
         public int BookId { get; set; }
         public string Title { get; set; }
+        [MaxLength(20)]
+        [Required]
         public string ISBN { get; set; }
         public decimal Price { get; set; }
+        [NotMapped]
+        public string PriceRange { get; set; }
     }
 }
 
@@ -47,4 +52,13 @@ namespace CodingWiki_Model.Models
  * [Key]
  * public int Category_Id { get; set; }
  * 
+ * 28. MaxLength and NotMapped
+ * 
+ * [MaxLength(50)]
+ * public string Title { get; set; }
+ * 
+ * [NotMapped]
+ * public double DiscountPrice { get; set; }
+ * not mapped basically means that there is some property which is doing some computation, but that
+ * property should not be added as a new column.
  */
