@@ -228,4 +228,8 @@ void AddBook()
  * 
  * Now if you notice here we had the book ID of one, two, three, four and this one is 1002. That is because with SQL 
  * Server, it blocks the 1000 ID.
+ * 
+ * 68. Async Methods
+ * 
+ * Microsoft also recommends that if you are not sure, always go with the async method because worst come worst async will have the same performance as synchronous methods.
  */
