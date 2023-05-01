@@ -26,7 +26,24 @@ Console.WriteLine("Hello, World!");
 //DeferredExecutionDemo();
 //SortData();
 //PaginationDemo();
-UpdateBook();
+//UpdateBook();
+
+DeleteBook();
+
+void DeleteBook()
+{
+    try
+    {
+        using var context = new ApplicationDbContext();
+        var book = context.Books.Find(1);
+        context.Books.Remove(book);
+        context.SaveChanges();
+    }
+    catch (Exception e)
+    {
+
+    }
+}
 
 void UpdateBook()
 {
