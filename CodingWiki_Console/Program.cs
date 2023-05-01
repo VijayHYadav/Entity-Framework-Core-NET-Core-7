@@ -4,16 +4,27 @@ using Microsoft.EntityFrameworkCore;
 
 Console.WriteLine("Hello, World!");
 
-using(ApplicationDbContext context = new())
-{
-    context.Database.EnsureCreated();
+//using(ApplicationDbContext context = new())
+//{
+//    context.Database.EnsureCreated();
 
-    if(context.Database.GetPendingMigrations().Count() > 0)
+//    if(context.Database.GetPendingMigrations().Count() > 0)
+//    {
+//        context.Database.Migrate();
+//    }
+//}
+
+GetAllBooks();
+
+void GetAllBooks()
+{
+    using var context = new ApplicationDbContext();
+    var books = context.Books.ToList();
+    foreach (var book in books)
     {
-        context.Database.Migrate();
+        Console.WriteLine(book.Title + "-" + book.ISBN);
     }
 }
-
 
 /**
  * 53. Database Helper Methods
@@ -27,5 +38,7 @@ using(ApplicationDbContext context = new())
  * And if the migrations are not applied, we can use the method context.Database.Migrate(); to apply all the pending
  * migrations to database. This way when we run the application, if any migrations are pending, it will automatically be
  * applied to the database.
- * 
+ *
+ * 54. Get All Books using EF-Core
+ * context.Books.ToList()
  */
