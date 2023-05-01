@@ -2,6 +2,7 @@
 using CodingWiki_DataAccess.Data;
 using CodingWiki_Model.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 Console.WriteLine("Hello, World!");
 
@@ -23,6 +24,20 @@ Console.WriteLine("Hello, World!");
 //SingleOrSingleDefaultEx();
 
 ContainsLikeAggregationDemo();
+
+DeferredExecutionDemo();
+void DeferredExecutionDemo()
+{
+    try
+    {
+        using var context = new ApplicationDbContext();
+        var books = context.Books; // DeferredExecution
+        foreach (var book in books)
+        {
+            Console.WriteLine(book.Title + " - " + book.ISBN);
+        }
+    }
+}
 
 void ContainsLikeAggregationDemo()
 {
