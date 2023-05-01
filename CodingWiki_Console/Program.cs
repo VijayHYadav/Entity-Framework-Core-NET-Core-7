@@ -16,7 +16,23 @@ Console.WriteLine("Hello, World!");
 //}
 
 GetAllBooks();
+GetBook();
 AddBook();
+
+void GetBook()
+{
+    using var context = new ApplicationDbContext();
+    var bookFirst = context.Books.First();
+    var bookFirstOrDefault = context.Books.FirstOrDefault();
+
+    /*
+     * First():  The statement that gets executed is select top one. It always expects one record to be returned. If it
+     * does not return a record, it throws an exception.
+     * If no records are found, it returns null. But when we use first and if no records are found, then it throws an 
+     * exception.
+     */
+}
+
 
 void GetAllBooks()
 {
