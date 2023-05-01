@@ -22,6 +22,23 @@ Console.WriteLine("Hello, World!");
 
 Find();
 
+SingleOrSingleDefaultEx();
+
+void SingleOrSingleDefaultEx()
+{
+    try
+    {
+        using var context = new ApplicationDbContext();
+        // That is the main difference between single and first default in first or default, whatever condition you have If it returns ten record, it will select the first one and return back. When you are using single or single or default, if more than one records are returned, it will throw an exception.
+        var book = context.Books.Single(u => u.ISBN== "1231231212");
+        // Now when we work with single here, it always returns one book But with single we can filter on any column.
+    }
+    catch (Exception ex)
+    {
+
+    }
+}
+
 void Find()
 {
     using var context = new ApplicationDbContext();
