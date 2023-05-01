@@ -37,13 +37,12 @@ void GetBook()
 void GetBookByCondition()
 {
     using var context = new ApplicationDbContext();
-    var books = context.Books.Where(u => u.Publisher_Id == 3);
+    //var books = context.Books.Where(u => u.Publisher_Id == 3);
     // var books = context.Books.Where(u => u.Publisher_Id == 3).FirstOrDefault();
     // var books = context.Books.Where(u => u.Publisher_Id == 3 && u.Price>30).FirstOrDefault();
-    foreach (var book in books)
-    {
-        Console.Write(book.BookId + " - " + book.Title);
-    }
+    const string input = "Cookie Jar";
+    var book = context.Books.FirstOrDefault(u => u.Title == input);
+    Console.Write(book.BookId + " - " + book.Title);
 }
 
 
