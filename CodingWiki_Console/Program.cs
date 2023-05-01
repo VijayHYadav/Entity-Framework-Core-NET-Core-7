@@ -53,4 +53,7 @@ void AddBook()
  *
  * 54. Get All Books using EF-Core
  * context.Books.ToList()
+ * 
+ * Now if you notice here we had the book ID of one, two, three, four and this one is 1002. That is because with SQL 
+ * Server, it blocks the 1000 ID.
  */
