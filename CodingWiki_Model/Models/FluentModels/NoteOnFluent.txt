@@ -1,0 +1,11 @@
+﻿Fluent API is an advanced way of specifying model configuration that covers everything that data annotation
+can do in addition to some advanced configuration which are not possible with data annotation.
+
+Like we have to define composite key on the foreign keys that we saw in the last video.
+
+Data, annotations and fluent API can be used together, but code first will give preference to fluent
+API, then data annotation and finally default convention.
+
+So fluent API is just another way to configure your domain classes.
+
+In order to use fluent API, you have to do that in the Dbcontext class with the on model creating override.
