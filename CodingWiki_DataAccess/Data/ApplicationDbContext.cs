@@ -14,12 +14,14 @@ namespace CodingWiki_DataAccess.Data
         public DbSet<Category> Genres { get; set; }
         public DbSet<Author> Authors { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
+        public DbSet<BookAuthorMap> BookAuthorMaps { get; set; }
         public DbSet<SubCategory> SubCategorys { get; set; }
         public DbSet<BookDetail> BookDetails { get; set; }
         public DbSet<Fluent_BookDetail> BookDetails_Fluent { get; set; }
         public DbSet<Fluent_Book> Fluent_Books { get; set; }
         public DbSet<Fluent_Author> Fluent_Authors { get; set; }
         public DbSet<Fluent_Publisher> Fluent_Publishers { get; set; }
+        public DbSet<Fluent_BookAuthorMap> Fluent_BookAuthorMaps { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
@@ -156,6 +158,19 @@ namespace CodingWiki_DataAccess.Data
  * 25. Seed Data Using Migration
  * >> add-migration seedBookTable
  * >> update-database
+ * 
+ * 51. How Smart EF Core is?
+ * 
+ * Whenever we have to create any table in the database, we need to create a DB set for that.
+ * We have the book author map table and we have the fluent underscore book author map table.
+ * But did we have a DB set for that here? We did not. Entity framework was super smart when we were working with Author.
+ * We said that will have the book author map and it will be a list. And similarly, when we were working with Book, we
+ * had the same thing for the book author map. It examined the book author map here and it found out that this is a 
+ * mapping table for book and author. That is why, even though we did not create that in a DB set, it automatically added
+ * that in the migration. So you can see how smart entity framework core really is.
+ * Typically we will not need the DB set of the mapping table if we directly let entity framework core But for some
+ * reason, if you want to access that, then you need to create a DB set to retrieve records from that mapping table.
+ * 
  */
 
 /**
