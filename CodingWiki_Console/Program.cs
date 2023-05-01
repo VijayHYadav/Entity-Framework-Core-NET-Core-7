@@ -22,10 +22,29 @@ Console.WriteLine("Hello, World!");
 //GetBookByCondition();
 //Find();
 //SingleOrSingleDefaultEx();
+//ContainsLikeAggregationDemo();
+//DeferredExecutionDemo();
 
-ContainsLikeAggregationDemo();
+SortData();
 
-DeferredExecutionDemo();
+void SortData()
+{
+    try
+    {
+        using var context = new ApplicationDbContext();
+        var books = context.Books.Where(u=>u.Price>10).OrderBy(u => u.Title).ThenByDescending(u=>u.ISBN);
+
+        foreach (var book in books)
+        {
+            Console.WriteLine(book.Title + " - " + book.ISBN);
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.ToString());
+    }
+}
+
 void DeferredExecutionDemo()
 {
     try
@@ -36,6 +55,10 @@ void DeferredExecutionDemo()
         {
             Console.WriteLine(book.Title + " - " + book.ISBN);
         }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.ToString());
     }
 }
 
