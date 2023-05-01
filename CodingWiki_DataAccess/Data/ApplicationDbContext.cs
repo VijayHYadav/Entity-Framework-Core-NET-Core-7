@@ -16,6 +16,7 @@ namespace CodingWiki_DataAccess.Data
         public DbSet<Publisher> Publishers { get; set; }
         public DbSet<SubCategory> SubCategorys { get; set; }
         public DbSet<BookDetail> BookDetails { get; set; }
+        public DbSet<Fluent_BookDetail> BookDetails_Fluent { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
@@ -24,6 +25,10 @@ namespace CodingWiki_DataAccess.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<Fluent_BookDetail>().ToTable("Fluent_BookDetails");
+            modelBuilder.Entity<Fluent_BookDetail>().Property(u => u.NumberOfChapters).HasColumnName("NoOfChapters");
+
             modelBuilder.Entity<Book>().Property(u => u.Price).HasPrecision(10, 5);
 
             // With this, the composite key will be defined.

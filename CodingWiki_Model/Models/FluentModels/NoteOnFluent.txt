@@ -9,3 +9,6 @@ API, then data annotation and finally default convention.
 So fluent API is just another way to configure your domain classes.
 
 In order to use fluent API, you have to do that in the Dbcontext class with the on model creating override.
+
+IMP
+we cannot remove the key and required and then remove migration.
