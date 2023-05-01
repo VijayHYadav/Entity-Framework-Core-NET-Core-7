@@ -15,10 +15,22 @@ Console.WriteLine("Hello, World!");
 //    }
 //}
 
-GetAllBooks();
-GetBook();
+//GetAllBooks();
+//GetBook();
 // AddBook();
-GetBookByCondition();
+//GetBookByCondition();
+
+Find();
+
+void Find()
+{
+    using var context = new ApplicationDbContext();
+    var book = context.Books.Find(3);
+    // So find can be used only if you want to filter directly on the key value of an entity. Find is not a link method,
+    // it is a method on the dbset itself. So another way of retrieving only one record if you are filtering on the key
+    // value of an entity is to
+    Console.Write(book.BookId + " - " + book.Title);
+}
 
 void GetBook()
 {
