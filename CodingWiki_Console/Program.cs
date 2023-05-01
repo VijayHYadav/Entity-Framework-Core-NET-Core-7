@@ -25,7 +25,32 @@ Console.WriteLine("Hello, World!");
 //ContainsLikeAggregationDemo();
 //DeferredExecutionDemo();
 
-SortData();
+//SortData();
+
+PaginationDemo();
+
+void PaginationDemo()
+{
+    try
+    {
+        using var context = new ApplicationDbContext();
+        var books = context.Books.Skip(0).Take(2);
+        foreach(var book in books)
+        {
+            Console.WriteLine(book.Title + " - " + book.ISBN);
+        }
+
+        books = context.Books.Skip(4).Take(1);
+        foreach (var book in books)
+        {
+            Console.WriteLine(book.Title + " - " + book.ISBN);
+        }
+    }
+    catch (Exception e)
+    {
+
+    }
+}
 
 void SortData()
 {
