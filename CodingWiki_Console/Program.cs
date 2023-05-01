@@ -30,14 +30,14 @@ Console.WriteLine("Hello, World!");
 
 DeleteBook();
 
-void DeleteBook()
+async void DeleteBook()
 {
     try
     {
         using var context = new ApplicationDbContext();
-        var book = context.Books.Find(1);
+        var book = await context.Books.FindAsync(1);
         context.Books.Remove(book);
-        context.SaveChanges();
+        await context.SaveChangesAsync();
     }
     catch (Exception e)
     {
@@ -45,16 +45,16 @@ void DeleteBook()
     }
 }
 
-void UpdateBook()
+async void UpdateBook()
 {
     try
     {
         using var context = new ApplicationDbContext();
         // EF core always keeps a track of the record that is being retrieved and to update anything, we just have to update the record and call the method Save changes.
-        var books = context.Books.Find(1);
+        var books = await context.Books.FindAsync(1);
 
         books.ISBN = "786";
-        context.SaveChanges();
+        await context.SaveChangesAsync();
         
     }
     catch (Exception e)
@@ -190,10 +190,10 @@ void GetBookByCondition()
 }
 
 
-void GetAllBooks()
+async void GetAllBooks()
 {
     using var context = new ApplicationDbContext();
-    var books = context.Books.ToList();
+    var books = await context.Books.ToListAsync();
     foreach (var book in books)
     {
         Console.WriteLine(book.Title + "-" + book.ISBN);
