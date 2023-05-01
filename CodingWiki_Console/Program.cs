@@ -24,10 +24,27 @@ Console.WriteLine("Hello, World!");
 //SingleOrSingleDefaultEx();
 //ContainsLikeAggregationDemo();
 //DeferredExecutionDemo();
-
 //SortData();
+//PaginationDemo();
+UpdateBook();
 
-PaginationDemo();
+void UpdateBook()
+{
+    try
+    {
+        using var context = new ApplicationDbContext();
+        // EF core always keeps a track of the record that is being retrieved and to update anything, we just have to update the record and call the method Save changes.
+        var books = context.Books.Find(1);
+
+        books.ISBN = "786";
+        context.SaveChanges();
+        
+    }
+    catch (Exception e)
+    {
+
+    }
+}
 
 void PaginationDemo()
 {
