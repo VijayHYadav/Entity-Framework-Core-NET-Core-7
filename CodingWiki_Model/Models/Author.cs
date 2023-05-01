@@ -30,5 +30,7 @@ namespace CodingWiki_Model.Models
             }
         }
 
+        public List<Book> Books { get; set; }
+
     }
 }
