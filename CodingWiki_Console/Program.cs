@@ -19,10 +19,28 @@ Console.WriteLine("Hello, World!");
 //GetBook();
 // AddBook();
 //GetBookByCondition();
+//Find();
+//SingleOrSingleDefaultEx();
 
-Find();
+ContainsLikeAggregationDemo();
 
-SingleOrSingleDefaultEx();
+void ContainsLikeAggregationDemo()
+{
+    try
+    {
+        using var context = new ApplicationDbContext();
+        var books = context.Books.Where(u => u.ISBN.Contains("12"));
+        //var books = context.Books.Where(u => EF.Functions.Like(u.ISBN, "12%"));
+        //var books = context.Books.Where(u => EF.Functions.Like(u.ISBN, "12%")).Max(u=>u.Price); //Max, Min, Count
+        foreach (var book in books)
+        {
+            Console.WriteLine(book.Title + " - " + book.ISBN);
+        }
+    } catch (Exception ex)
+    {
+
+    }
+}
 
 void SingleOrSingleDefaultEx()
 {
