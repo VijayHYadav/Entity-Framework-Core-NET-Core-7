@@ -43,14 +43,7 @@
                             @item.Publisher.Name
                         </td>
                         <td>
-                            @{
-                                var authors = "";
-                            }
-                            @foreach (var auth in item.BookAuthorMap)
-                            {
-                                authors += @auth.Author.FullName + ", ";
-                            }
-                            @authors.Trim().TrimEnd(',')
+                            
                         </td>
                         <td>
                             <a class="btn btn-primary text-white" asp-action="Upsert" asp-route-Id="@item.BookId">
