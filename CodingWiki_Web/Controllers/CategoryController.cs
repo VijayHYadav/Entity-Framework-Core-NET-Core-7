@@ -74,5 +74,29 @@ namespace CodingWiki_Web.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult CreateMultiple2()
+        {
+            for (int i = 0; i <= 2; i++)
+            {
+                _db.Categories.Add(new Category { CategoryName = Guid.NewGuid().ToString() });
+            }
+            _db.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult CreateMultiple5()
+        {
+            List<Category> Catlist = new List<Category>();
+            for (int i = 0; i <= 5; i++)
+            {
+                Catlist.Add(new Category { CategoryName = Guid.NewGuid().ToString() });
+            }
+            _db.Categories.AddRange(Catlist);
+            _db.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
