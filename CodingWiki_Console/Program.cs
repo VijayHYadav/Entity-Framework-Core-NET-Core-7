@@ -28,186 +28,186 @@ Console.WriteLine("Hello, World!");
 //PaginationDemo();
 //UpdateBook();
 
-DeleteBook();
+//DeleteBook();
 
-async void DeleteBook()
-{
-    try
-    {
-        using var context = new ApplicationDbContext();
-        var book = await context.Books.FindAsync(1);
-        context.Books.Remove(book);
-        await context.SaveChangesAsync();
-    }
-    catch (Exception e)
-    {
+//async void DeleteBook()
+//{
+//    try
+//    {
+//        using var context = new ApplicationDbContext();
+//        var book = await context.Books.FindAsync(1);
+//        context.Books.Remove(book);
+//        await context.SaveChangesAsync();
+//    }
+//    catch (Exception e)
+//    {
 
-    }
-}
+//    }
+//}
 
-async void UpdateBook()
-{
-    try
-    {
-        using var context = new ApplicationDbContext();
-        // EF core always keeps a track of the record that is being retrieved and to update anything, we just have to update the record and call the method Save changes.
-        var books = await context.Books.FindAsync(1);
+//async void UpdateBook()
+//{
+//    try
+//    {
+//        using var context = new ApplicationDbContext();
+//        // EF core always keeps a track of the record that is being retrieved and to update anything, we just have to update the record and call the method Save changes.
+//        var books = await context.Books.FindAsync(1);
 
-        books.ISBN = "786";
-        await context.SaveChangesAsync();
+//        books.ISBN = "786";
+//        await context.SaveChangesAsync();
         
-    }
-    catch (Exception e)
-    {
+//    }
+//    catch (Exception e)
+//    {
 
-    }
-}
+//    }
+//}
 
-void PaginationDemo()
-{
-    try
-    {
-        using var context = new ApplicationDbContext();
-        var books = context.Books.Skip(0).Take(2);
-        foreach(var book in books)
-        {
-            Console.WriteLine(book.Title + " - " + book.ISBN);
-        }
+//void PaginationDemo()
+//{
+//    try
+//    {
+//        using var context = new ApplicationDbContext();
+//        var books = context.Books.Skip(0).Take(2);
+//        foreach(var book in books)
+//        {
+//            Console.WriteLine(book.Title + " - " + book.ISBN);
+//        }
 
-        books = context.Books.Skip(4).Take(1);
-        foreach (var book in books)
-        {
-            Console.WriteLine(book.Title + " - " + book.ISBN);
-        }
-    }
-    catch (Exception e)
-    {
+//        books = context.Books.Skip(4).Take(1);
+//        foreach (var book in books)
+//        {
+//            Console.WriteLine(book.Title + " - " + book.ISBN);
+//        }
+//    }
+//    catch (Exception e)
+//    {
 
-    }
-}
+//    }
+//}
 
-void SortData()
-{
-    try
-    {
-        using var context = new ApplicationDbContext();
-        var books = context.Books.Where(u=>u.Price>10).OrderBy(u => u.Title).ThenByDescending(u=>u.ISBN);
+//void SortData()
+//{
+//    try
+//    {
+//        using var context = new ApplicationDbContext();
+//        var books = context.Books.Where(u=>u.Price>10).OrderBy(u => u.Title).ThenByDescending(u=>u.ISBN);
 
-        foreach (var book in books)
-        {
-            Console.WriteLine(book.Title + " - " + book.ISBN);
-        }
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine(ex.ToString());
-    }
-}
+//        foreach (var book in books)
+//        {
+//            Console.WriteLine(book.Title + " - " + book.ISBN);
+//        }
+//    }
+//    catch (Exception ex)
+//    {
+//        Console.WriteLine(ex.ToString());
+//    }
+//}
 
-void DeferredExecutionDemo()
-{
-    try
-    {
-        using var context = new ApplicationDbContext();
-        var books = context.Books; // DeferredExecution
-        foreach (var book in books)
-        {
-            Console.WriteLine(book.Title + " - " + book.ISBN);
-        }
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine(ex.ToString());
-    }
-}
+//void DeferredExecutionDemo()
+//{
+//    try
+//    {
+//        using var context = new ApplicationDbContext();
+//        var books = context.Books; // DeferredExecution
+//        foreach (var book in books)
+//        {
+//            Console.WriteLine(book.Title + " - " + book.ISBN);
+//        }
+//    }
+//    catch (Exception ex)
+//    {
+//        Console.WriteLine(ex.ToString());
+//    }
+//}
 
-void ContainsLikeAggregationDemo()
-{
-    try
-    {
-        using var context = new ApplicationDbContext();
-        var books = context.Books.Where(u => u.ISBN.Contains("12"));
-        //var books = context.Books.Where(u => EF.Functions.Like(u.ISBN, "12%"));
-        //var books = context.Books.Where(u => EF.Functions.Like(u.ISBN, "12%")).Max(u=>u.Price); //Max, Min, Count
-        foreach (var book in books)
-        {
-            Console.WriteLine(book.Title + " - " + book.ISBN);
-        }
-    } catch (Exception ex)
-    {
+//void ContainsLikeAggregationDemo()
+//{
+//    try
+//    {
+//        using var context = new ApplicationDbContext();
+//        var books = context.Books.Where(u => u.ISBN.Contains("12"));
+//        //var books = context.Books.Where(u => EF.Functions.Like(u.ISBN, "12%"));
+//        //var books = context.Books.Where(u => EF.Functions.Like(u.ISBN, "12%")).Max(u=>u.Price); //Max, Min, Count
+//        foreach (var book in books)
+//        {
+//            Console.WriteLine(book.Title + " - " + book.ISBN);
+//        }
+//    } catch (Exception ex)
+//    {
 
-    }
-}
+//    }
+//}
 
-void SingleOrSingleDefaultEx()
-{
-    try
-    {
-        using var context = new ApplicationDbContext();
-        // That is the main difference between single and first default in first or default, whatever condition you have If it returns ten record, it will select the first one and return back. When you are using single or single or default, if more than one records are returned, it will throw an exception.
-        var book = context.Books.Single(u => u.ISBN== "1231231212");
-        // Now when we work with single here, it always returns one book But with single we can filter on any column.
-    }
-    catch (Exception ex)
-    {
+//void SingleOrSingleDefaultEx()
+//{
+//    try
+//    {
+//        using var context = new ApplicationDbContext();
+//        // That is the main difference between single and first default in first or default, whatever condition you have If it returns ten record, it will select the first one and return back. When you are using single or single or default, if more than one records are returned, it will throw an exception.
+//        var book = context.Books.Single(u => u.ISBN== "1231231212");
+//        // Now when we work with single here, it always returns one book But with single we can filter on any column.
+//    }
+//    catch (Exception ex)
+//    {
 
-    }
-}
+//    }
+//}
 
-void Find()
-{
-    using var context = new ApplicationDbContext();
-    var book = context.Books.Find(3);
-    // So find can be used only if you want to filter directly on the key value of an entity. Find is not a link method,
-    // it is a method on the dbset itself. So another way of retrieving only one record if you are filtering on the key
-    // value of an entity is to
-    Console.Write(book.BookId + " - " + book.Title);
-}
+//void Find()
+//{
+//    using var context = new ApplicationDbContext();
+//    var book = context.Books.Find(3);
+//    // So find can be used only if you want to filter directly on the key value of an entity. Find is not a link method,
+//    // it is a method on the dbset itself. So another way of retrieving only one record if you are filtering on the key
+//    // value of an entity is to
+//    Console.Write(book.BookId + " - " + book.Title);
+//}
 
-void GetBook()
-{
-    using var context = new ApplicationDbContext();
-    var bookFirst = context.Books.First();
-    var bookFirstOrDefault = context.Books.FirstOrDefault();
+//void GetBook()
+//{
+//    using var context = new ApplicationDbContext();
+//    var bookFirst = context.Books.First();
+//    var bookFirstOrDefault = context.Books.FirstOrDefault();
 
-    /*
-     * First():  The statement that gets executed is select top one. It always expects one record to be returned. If it
-     * does not return a record, it throws an exception.
-     * If no records are found, it returns null. But when we use first and if no records are found, then it throws an 
-     * exception.
-     */
-}
+//    /*
+//     * First():  The statement that gets executed is select top one. It always expects one record to be returned. If it
+//     * does not return a record, it throws an exception.
+//     * If no records are found, it returns null. But when we use first and if no records are found, then it throws an 
+//     * exception.
+//     */
+//}
 
-void GetBookByCondition()
-{
-    using var context = new ApplicationDbContext();
-    //var books = context.Books.Where(u => u.Publisher_Id == 3);
-    // var books = context.Books.Where(u => u.Publisher_Id == 3).FirstOrDefault();
-    // var books = context.Books.Where(u => u.Publisher_Id == 3 && u.Price>30).FirstOrDefault();
-    const string input = "Cookie Jar";
-    var book = context.Books.FirstOrDefault(u => u.Title == input);
-    Console.Write(book.BookId + " - " + book.Title);
-}
+//void GetBookByCondition()
+//{
+//    using var context = new ApplicationDbContext();
+//    //var books = context.Books.Where(u => u.Publisher_Id == 3);
+//    // var books = context.Books.Where(u => u.Publisher_Id == 3).FirstOrDefault();
+//    // var books = context.Books.Where(u => u.Publisher_Id == 3 && u.Price>30).FirstOrDefault();
+//    const string input = "Cookie Jar";
+//    var book = context.Books.FirstOrDefault(u => u.Title == input);
+//    Console.Write(book.BookId + " - " + book.Title);
+//}
 
 
-async void GetAllBooks()
-{
-    using var context = new ApplicationDbContext();
-    var books = await context.Books.ToListAsync();
-    foreach (var book in books)
-    {
-        Console.WriteLine(book.Title + "-" + book.ISBN);
-    }
-}
+//async void GetAllBooks()
+//{
+//    using var context = new ApplicationDbContext();
+//    var books = await context.Books.ToListAsync();
+//    foreach (var book in books)
+//    {
+//        Console.WriteLine(book.Title + "-" + book.ISBN);
+//    }
+//}
 
-void AddBook()
-{
-    Book book = new Book { Title = "New EF Core Book", ISBN = "1231231212", Price = 10.93m, Publisher_Id = 1 };
-    using var context = new ApplicationDbContext();
-    //We can add multiple books if we want to, but when we call save changes, only that time it will go to the database and create the records.
-    var books = context.Books.Add(book);
-    context.SaveChanges();
-}
+//void AddBook()
+//{
+//    Book book = new Book { Title = "New EF Core Book", ISBN = "1231231212", Price = 10.93m, Publisher_Id = 1 };
+//    using var context = new ApplicationDbContext();
+//    //We can add multiple books if we want to, but when we call save changes, only that time it will go to the database and create the records.
+//    var books = context.Books.Add(book);
+//    context.SaveChanges();
+//}
 
 
 /**
