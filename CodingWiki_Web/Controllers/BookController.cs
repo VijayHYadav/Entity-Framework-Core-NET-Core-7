@@ -1,6 +1,8 @@
 ﻿using CodingWiki_DataAccess.Data;
 using CodingWiki_Model.Models;
+using CodingWiki_Model.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CodingWiki_Web.Controllers
 {
@@ -19,23 +21,30 @@ namespace CodingWiki_Web.Controllers
             return View(objList);
         }
 
-        //public IActionResult Upsert(int? id)
-        //{
-        //    Category obj = new();
-        //    if (id == null || id == 0)
-        //    {
-        //        // create
-        //        return View(obj);
-        //    }
-        //    // edit
-        //    obj = _db.Categories.FirstOrDefault(u=>u.CategoryId== id);
-        //    if (obj == null)
-        //    {
-        //        return NotFound();
-        //    }
+        public IActionResult Upsert(int? id)
+        {
+            BookVM obj = new();
 
-        //    return View(obj);
-        //}
+            obj.PublisherList = _db.Publishers.Select(i => new SelectListItem
+            {
+                Text = i.Name,
+                Value = i.Publisher_Id.ToString()
+            });
+
+            if (id == null || id == 0)
+            {
+                // create
+                return View(obj);
+            }
+            // edit
+            obj.Book = _db.Books.FirstOrDefault(u => u.BookId == id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            return View(obj);
+        }
 
         //[HttpPost]
         //[ValidateAntiForgeryToken]
@@ -62,7 +71,7 @@ namespace CodingWiki_Web.Controllers
         //{
         //    Category obj = new();
         //    obj = _db.Categories.FirstOrDefault(u => u.CategoryId == id);
-            
+
         //    // edit
         //    if (obj == null)
         //    {
@@ -76,3 +85,12 @@ namespace CodingWiki_Web.Controllers
         //}
     }
 }
+
+/*
+ *  83. Projections in EF Core
+ *  
+ * Projections in EF Core: projection is a way of translating a full entity into a C-sharp class with a subset of those properties.
+ * It is used to create a query that will select from a complete entity, like all the properties in your model, but the result that it will return will be of a different type and it typically has less properties.
+ * Now, projection query improves the efficiency of your application because you select only fields that are needed and not all the properties. We will be using Select LINQ statement for projection.
+ * 
+ */
