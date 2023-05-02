@@ -3,6 +3,7 @@ using CodingWiki_Model.Models;
 using CodingWiki_Model.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Policy;
 
 namespace CodingWiki_Web.Controllers
@@ -18,14 +19,14 @@ namespace CodingWiki_Web.Controllers
 
         public IActionResult Index()
         {
-            List<Book> objList = _db.Books.ToList();
-            foreach (var obj in objList)
-            {
-                // obj.Publisher = _db.Publishers.Find(obj.Publisher_Id); non-effecitve way
-                _db.Entry(obj).Reference(u => u.Publisher).Load(); // effective way So this method basically avoids the duplicate calls to the database for the same publisher ID.
-                // since there will be only one publisher, we will be using Reference here.
-                // If there were more than one publisher, then we will be using collection
-            }
+            List<Book> objList = _db.Books.Include(u=>u.Publisher).ToList();
+            //foreach (var obj in objList)
+            //{
+            //    // obj.Publisher = _db.Publishers.Find(obj.Publisher_Id); non-effecitve way
+            //    _db.Entry(obj).Reference(u => u.Publisher).Load(); // effective way So this method basically avoids the duplicate calls to the database for the same publisher ID.
+            //    // since there will be only one publisher, we will be using Reference here.
+            //    // If there were more than one publisher, then we will be using collection
+            //}
             return View(objList);
         }
 
@@ -83,8 +84,7 @@ namespace CodingWiki_Web.Controllers
             BookDetail obj = new();
 
             // edit
-            obj.Book = _db.Books.FirstOrDefault(u => u.BookId == id);
-            obj = _db.BookDetails.FirstOrDefault(v => v.Book_Id == id);
+            obj = _db.BookDetails.Include(u=>u.Book).FirstOrDefault(v => v.Book_Id == id);
             if (obj == null)
             {
                 return NotFound();
