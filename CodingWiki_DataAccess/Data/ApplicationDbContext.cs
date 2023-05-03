@@ -13,6 +13,7 @@ namespace CodingWiki_DataAccess.Data
     public class ApplicationDbContext : DbContext
     {
         public DbSet<Book> Books { get; set; }
+        public DbSet<GetOnlyBookDetails> GetOnlyBookDetails { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Author> Authors { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
@@ -65,6 +66,9 @@ namespace CodingWiki_DataAccess.Data
                 new Publisher { Publisher_Id = 2, Name = "Pub 2 John", Location = "New York" },
                 new Publisher { Publisher_Id = 3, Name = "Pub 3 Ben", Location = "Hawaii" }
             );
+
+            modelBuilder.Entity<GetOnlyBookDetails>().HasNoKey().ToView("GetOnlyBookDetails");
+            // One thing that is important about the has no key is that if code will never track this entity since it does not have a primary key. Because of that, anything you retrieve from the view will always be read only. And if you explicitly try to set the tracking by using as tracking, it will simply ignore that.
         }
     }
 }

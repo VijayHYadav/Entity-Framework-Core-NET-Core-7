@@ -195,6 +195,27 @@ namespace CodingWiki_Web.Controllers
 
         public async Task<IActionResult> PlayGround(int? id)
         {
+            //View
+            var viewList = _db.GetOnlyBookDetails.ToList();
+            var viewList2 = _db.GetOnlyBookDetails.FirstOrDefault();
+            var viewList3 = _db.GetOnlyBookDetails.Where(u=>u.Price>30);
+
+            //raw sql
+            var bookRaw1 = _db.Books.FromSqlRaw("Select * from dbo.books").ToList();
+            var identity = 1;
+            var bookRaw2 = _db.Books.FromSqlInterpolated($"Select * from dbo.books where bookid={identity}").ToList();
+            var bookRaw3 = _db.Books.FromSqlRaw("Select * from dbo.books where bookid={0}",1).ToList();
+
+            // sproc
+            var booksproc = _db.Books.FromSqlInterpolated($"EXEC db.getBookDetailById {id}").ToList();
+            // there are many limitations when it comes to raw SQL views or stored procedure like
+            // SQL cannot return shaped data or schema of the result will always have to match the entire DB set like book
+            // In our case, we cannot return a subset because we are querying on the DB set. Also, the column names of the
+            // result have to match the name of the entity and much more. With all of these limitations around stored
+            // procedures and raw SQL, if that is the main scope, I would highly recommend you to look into using Dapper.
+            // Dapper is highly efficient when it comes to executing stored procedures and other details using SQL
+
+
             //IEnumerable<Book> BookList1 = _db.Books;
             //var FilteredBook1 = BookList1.Where(b => b.Price > 50).ToList();
 
@@ -204,17 +225,18 @@ namespace CodingWiki_Web.Controllers
             //
             //"Attach" associates two entities, while "update" modifies the attributes of a single entity.
 
-            var bookdetails1 = _db.BookDetails.Include(b => b.Book).FirstOrDefault(b => b.BookDetail_Id == 5);
-            bookdetails1.NumberOfChapters = 2222;
-            bookdetails1.Book.Price = 222;
-            _db.BookDetails.Update(bookdetails1);
-            _db.SaveChanges();
+            //
+            //var bookdetails1 = _db.BookDetails.Include(b => b.Book).FirstOrDefault(b => b.BookDetail_Id == 5);
+            //bookdetails1.NumberOfChapters = 2222;
+            //bookdetails1.Book.Price = 222;
+            //_db.BookDetails.Update(bookdetails1);
+            //_db.SaveChanges();
 
-            var bookdetails2 = _db.BookDetails.Include(b => b.Book).FirstOrDefault(b => b.BookDetail_Id == 5);
-            bookdetails2.NumberOfChapters = 1111;
-            bookdetails2.Book.Price = 111;
-            _db.BookDetails.Attach(bookdetails2);
-            _db.SaveChanges();
+            //var bookdetails2 = _db.BookDetails.Include(b => b.Book).FirstOrDefault(b => b.BookDetail_Id == 5);
+            //bookdetails2.NumberOfChapters = 1111;
+            //bookdetails2.Book.Price = 111;
+            //_db.BookDetails.Attach(bookdetails2);
+            //_db.SaveChanges();
 
             //var bookTemp = _db.Books.FirstOrDefault();
             //bookTemp.Price = 100;
