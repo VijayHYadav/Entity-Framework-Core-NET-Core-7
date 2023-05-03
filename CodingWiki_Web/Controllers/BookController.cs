@@ -131,27 +131,33 @@ namespace CodingWiki_Web.Controllers
 
         public async Task<IActionResult> PlayGround(int? id)
         {
-            var bookTemp = _db.Books.FirstOrDefault();
-            bookTemp.Price = 100;
+            IEnumerable<Book> BookList1 = _db.Books;
+            var FilteredBook1 = BookList1.Where(b => b.Price > 50).ToList();
 
-            var bookCollection = _db.Books;
-            decimal totalPrice = 0;
+            IQueryable<Book> BookList2 = _db.Books;
+            var fileredBook2 = BookList2.Where(b => b.Price > 50).ToList();
 
-            foreach (var book in bookCollection)
-            {
-                totalPrice += book.Price;
-            }
+            //var bookTemp = _db.Books.FirstOrDefault();
+            //bookTemp.Price = 100;
 
-            var bookList = _db.Books.ToList();
-            foreach (var book in bookList)
-            {
-                totalPrice += book.Price;
-            }
+            //var bookCollection = _db.Books;
+            //decimal totalPrice = 0;
 
-            var bookCollection2 = _db.Books;
-            var bookCount1 = bookCollection2.Count();
+            //foreach (var book in bookCollection)
+            //{
+            //    totalPrice += book.Price;
+            //}
 
-            var bookCount2 = _db.Books.Count();
+            //var bookList = _db.Books.ToList();
+            //foreach (var book in bookList)
+            //{
+            //    totalPrice += book.Price;
+            //}
+
+            //var bookCollection2 = _db.Books;
+            //var bookCount1 = bookCollection2.Count();
+
+            //var bookCount2 = _db.Books.Count();
 
             return RedirectToAction(nameof(Index));
         }
