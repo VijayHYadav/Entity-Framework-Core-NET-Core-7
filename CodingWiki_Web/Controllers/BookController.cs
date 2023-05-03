@@ -19,14 +19,23 @@ namespace CodingWiki_Web.Controllers
 
         public IActionResult Index()
         {
-            List<Book> objList = _db.Books.Include(u=>u.Publisher).ToList();
-            //foreach (var obj in objList)
-            //{
-            //    // obj.Publisher = _db.Publishers.Find(obj.Publisher_Id); non-effecitve way
-            //    _db.Entry(obj).Reference(u => u.Publisher).Load(); // effective way So this method basically avoids the duplicate calls to the database for the same publisher ID.
-            //    // since there will be only one publisher, we will be using Reference here.
-            //    // If there were more than one publisher, then we will be using collection
-            //}
+            // List<Book> objList = _db.Books.Include(u=>u.Publisher).ToList();
+            List<Book> objList = _db.Books.ToList();
+            foreach (var obj in objList)
+                {
+                //    // obj.Publisher = _db.Publishers.Find(obj.Publisher_Id); non-effecitve way
+                //    _db.Entry(obj).Reference(u => u.Publisher).Load(); // effective way So this method basically avoids the duplicate calls to the database for the same publisher ID.
+                //    // since there will be only one publisher, we will be using Reference here.
+                //    // If there were more than one publisher, then we will be using collection
+
+                _db.Entry(obj).Reference(u => u.Publisher).Load();
+            _db.Entry(obj).Collection(u => u.BookAuthorMap).Load();
+
+                foreach (var bookAuth in obj.BookAuthorMap)
+                {
+                    _db.Entry(bookAuth).Reference(u => u.Author).Load();
+                }
+        }
             return View(objList);
         }
 
