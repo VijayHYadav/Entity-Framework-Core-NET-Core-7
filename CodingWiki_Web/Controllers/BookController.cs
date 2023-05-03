@@ -131,11 +131,26 @@ namespace CodingWiki_Web.Controllers
 
         public async Task<IActionResult> PlayGround(int? id)
         {
-            IEnumerable<Book> BookList1 = _db.Books;
-            var FilteredBook1 = BookList1.Where(b => b.Price > 50).ToList();
+            //IEnumerable<Book> BookList1 = _db.Books;
+            //var FilteredBook1 = BookList1.Where(b => b.Price > 50).ToList();
 
-            IQueryable<Book> BookList2 = _db.Books;
-            var fileredBook2 = BookList2.Where(b => b.Price > 50).ToList();
+            //IQueryable<Book> BookList2 = _db.Books;
+            //var fileredBook2 = BookList2.Where(b => b.Price > 50).ToList();
+
+            //
+            //"Attach" associates two entities, while "update" modifies the attributes of a single entity.
+
+            var bookdetails1 = _db.BookDetails.Include(b => b.Book).FirstOrDefault(b => b.BookDetail_Id == 5);
+            bookdetails1.NumberOfChapters = 2222;
+            bookdetails1.Book.Price = 222;
+            _db.BookDetails.Update(bookdetails1);
+            _db.SaveChanges();
+
+            var bookdetails2 = _db.BookDetails.Include(b => b.Book).FirstOrDefault(b => b.BookDetail_Id == 5);
+            bookdetails2.NumberOfChapters = 1111;
+            bookdetails2.Book.Price = 111;
+            _db.BookDetails.Attach(bookdetails2);
+            _db.SaveChanges();
 
             //var bookTemp = _db.Books.FirstOrDefault();
             //bookTemp.Price = 100;
